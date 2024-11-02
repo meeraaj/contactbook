@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Contact by Name</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4 text-center">Search Contact by Name</h1>
+        <form action="/search_name" method="post">
+            <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
+            <button type="submit" class="btn btn-primary mt-3">Search</button>
+        </form>
+        
+        <!-- Include table to display results -->
+        {% include 'table_template.html' %}
+
+        <!-- Back button -->
+        <a href="/" onclick="window.top.location.href='/'" class="btn btn-secondary mt-3">Back to Main Page</a>
+
+    </div>
+</body>
+</html>

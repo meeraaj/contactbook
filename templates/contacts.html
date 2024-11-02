@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Book</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .container-fluid {
+            display: flex;
+            height: 100%;
+            width: 100%;
+        }
+
+        .sidebar {
+            background-color: #6c757d; /* Gray background for the sidebar */
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            height: 100vh; /* Ensure the sidebar takes full viewport height */
+        }
+
+        .sidebar h4 {
+            text-align: center;
+            color: #ffffff; /* White color for the text */
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .sidebar .welcome-text {
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            color: #f8f9fa;
+        }
+
+        .sidebar .btn-custom {
+            width: 100%;
+            margin-bottom: 15px;
+            background-color: #495057; /* Darker gray button background */
+            color: white;
+            border: none;
+            padding: 10px;
+            text-align: left;
+            text-decoration: none;
+        }
+
+        .sidebar .btn-custom:hover {
+            background-color: #007bff;
+        }
+
+        .content-area {
+            flex-grow: 1; /* Take up remaining space */
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h4>Contact Book</h4>
+            <p class="welcome-text">Welcome to Contact Book Manager!</p>
+            <a href="/add" target="iframe-content" class="btn btn-custom">Add Contact</a>
+            <a href="/search_name" target="iframe-content" class="btn btn-custom">Search Contact by Name</a>
+            <a href="/search_phone" target="iframe-content" class="btn btn-custom">Search Contact by Number</a>
+            <a href="/search_email" target="iframe-content" class="btn btn-custom">Search Contact by Email</a>
+            <a href="/delete_name" target="iframe-content" class="btn btn-custom">Delete Contact by Name</a>
+            <a href="/delete_phone" target="iframe-content" class="btn btn-custom">Delete Contact by Number</a>
+            <a href="/modify" target="iframe-content" class="btn btn-custom">Modify Contact</a>
+            <a href="/all_contacts" target="iframe-content" class="btn btn-custom">All Contacts</a>
+            <a href="/sort_ascending" target="iframe-content" class="btn btn-custom">Ascending Order of Contact</a>
+            <a href="/sort_descending" target="iframe-content" class="btn btn-custom">Descending Order of Contact</a>
+            <a href="/exit" class="btn btn-custom">Exit Contact Book</a>
+        </div>
+
+        <!-- Content area where iframe will load pages -->
+        <div class="content-area">
+            <!-- The iframe will automatically load the "All Contacts" page when the page first loads -->
+            <iframe name="iframe-content" src="/all_contacts" id="iframe-content"></iframe>
+        </div>
+    </div>
+</body>
+</html>

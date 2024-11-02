@@ -1,0 +1,25 @@
+<!-- table_template.html -->
+{% if contacts %}
+    <table class="table table-bordered table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+            <tr>
+                <td>{{ contact[0] }}</td>
+                <td>{{ contact[1] }}</td>
+                <td>{{ contact[2] }}</td>
+                <td>{{ contact[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No contacts found.</p>
+{% endif %}

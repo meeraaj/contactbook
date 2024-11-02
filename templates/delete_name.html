@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Contact by Name</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4 text-center">Delete Contact by Name</h1>
+        <form action="/delete_name" method="post">
+            <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
+            <button type="submit" class="btn btn-danger mt-3">Delete</button>
+        </form>
+        
+        <!-- Display message and include table for deleted contact -->
+        {% if message %}<p>{{ message }}</p>{% endif %}
+        {% include 'table_template.html' %}
+        
+        <!-- Back button -->
+        <a href="/" onclick="window.top.location.href='/'" class="btn btn-secondary mt-3">Back to Main Page</a>
+
+    </div>
+</body>
+</html>

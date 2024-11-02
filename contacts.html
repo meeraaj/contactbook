@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Book Management</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .content {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 4px;
+        }
+        .result-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Contact Book Management</h1>
+        </div>
+
+        <div class="content">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Enter name">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" placeholder="Enter phone number">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" rows="4" placeholder="Enter address"></textarea>
+            </div>
+
+            <div class="buttons">
+                <button class="button" onclick="addContact()">Save</button>
+                <button class="button" onclick="searchContact()">Search Contact</button>
+                <button class="button" onclick="displayContacts()">Display All Contacts</button>
+                <button class="button" onclick="deleteContact()">Delete Contact</button>
+                <button class="button" onclick="modifyContact()">Modify Contact</button>
+            </div>
+
+            <div class="results" id="results"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 Contact Book Management. All Rights Reserved.
+    </div>
+
+    <script>
+        async function addContact() {
+            let name = document.getElementById('name').value;
+            let phone = document.getElementById('phone').value;
+            let email = document.getElementById('email').value;
+            let address = document.getElementById('address').value;
+            const response = await fetch('http://localhost:5000/api/contacts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, phone, email, address })
+            });
+
+            const result = await response.json();
+            console.log("result:",result)
+            document.getElementById('results').innerText = result.message || result.error;
+            document.getElementById('results').style.display = 'block';
+        
+            let resultArea = document.getElementById('results');
+            resultArea.innerHTML = `<div class="result-item">Contact ${name} added successfully.</div>`;
+        }
+
+        function searchContact() {
+            let name = document.getElementById('name').value;
+
+
+            let resultArea = document.getElementById('results');
+            resultArea.innerHTML = `<div class="result-item">Search result for ${name}...</div>`;
+        }
+
+        function displayContacts() {
+            // Here you would call your Python backend or API to display all contacts
+            let resultArea = document.getElementById('results');
+            resultArea.innerHTML = `<div class="result-item">Displaying all contacts...</div>`;
+        }
+
+        function deleteContact() {
+            let name = document.getElementById('name').value;
+
+            // Here you would call your Python backend or API to delete the contact
+            let resultArea = document.getElementById('results');
+            resultArea.innerHTML = `<div class="result-item">Contact ${name} deleted successfully.</div>`;
+        }
+
+        function modifyContact() {
+            let name = document.getElementById('name').value;
+
+            // Here you would call your Python backend or API to modify the contact
+            let resultArea = document.getElementById('results');
+            resultArea.innerHTML = `<div class="result-item">Contact ${name} modified successfully.</div>`;
+        }
+    </script>
+
+</body>
+</html>
