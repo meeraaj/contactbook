@@ -21,7 +21,7 @@
         }
 
         .sidebar {
-            background-color: #6c757d; /* Gray background for the sidebar */
+            background-color: #6c757d;
             width: 250px;
             display: flex;
             flex-direction: column;
@@ -29,12 +29,12 @@
             justify-content: center;
             padding: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-            height: 100vh; /* Ensure the sidebar takes full viewport height */
+            height: 100vh;
         }
 
         .sidebar h4 {
             text-align: center;
-            color: #ffffff; /* White color for the text */
+            color: #ffffff;
             font-weight: bold;
             margin-bottom: 10px;
             font-size: 1.5rem;
@@ -50,7 +50,7 @@
         .sidebar .btn-custom {
             width: 100%;
             margin-bottom: 15px;
-            background-color: #495057; /* Darker gray button background */
+            background-color: #495057;
             color: white;
             border: none;
             padding: 10px;
@@ -63,17 +63,29 @@
         }
 
         .content-area {
-            flex-grow: 1; /* Take up remaining space */
+            flex-grow: 1;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+        }
+
+        /* Table styles */
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        /* Left align ID column */
+        .table td.id-column {
+            text-align: left;
         }
     </style>
 </head>
@@ -89,16 +101,15 @@
             <a href="/search_email" target="iframe-content" class="btn btn-custom">Search Contact by Email</a>
             <a href="/delete_name" target="iframe-content" class="btn btn-custom">Delete Contact by Name</a>
             <a href="/delete_phone" target="iframe-content" class="btn btn-custom">Delete Contact by Number</a>
-            <a href="/modify" target="iframe-content" class="btn btn-custom">Modify Contact</a>
+            <a href="/modify_contacts" target="iframe-content" class="btn btn-custom">Modify Contact</a>
             <a href="/all_contacts" target="iframe-content" class="btn btn-custom">All Contacts</a>
             <a href="/sort_ascending" target="iframe-content" class="btn btn-custom">Ascending Order of Contact</a>
             <a href="/sort_descending" target="iframe-content" class="btn btn-custom">Descending Order of Contact</a>
             <a href="/exit" class="btn btn-custom">Exit Contact Book</a>
         </div>
 
-        <!-- Content area where iframe will load pages -->
+        <!-- Content area with iframe for loading pages -->
         <div class="content-area">
-            <!-- The iframe will automatically load the "All Contacts" page when the page first loads -->
             <iframe name="iframe-content" src="/all_contacts" id="iframe-content"></iframe>
         </div>
     </div>
