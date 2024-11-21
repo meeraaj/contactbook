@@ -7,7 +7,7 @@ app = Flask(__name__)
 def get_db_connection():
     conn = psycopg2.connect(
         host="localhost",
-        user="contact_user",
+        user="contacts_user",
         password="xp",
         database="contacts"
     )
@@ -23,6 +23,51 @@ def all_contacts():
     cur.close()
     conn.close()
     return render_template('all_contacts.html', contacts=contacts)
+
+# Route to display the contacts list and modify form
+@app.route('/modify_contacts', methods=['GET', 'POST'])
+def modify_contacts():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM contacts')
+    contacts = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    if request.method == 'POST':
+        contact_id = request.form['contact_id']
+        return redirect(url_for('edit_contact', id=contact_id))
+
+    return render_template("modify_contacts.html", contacts=contacts)
+
+# Route to edit a specific contact
+@app.route('/modify_contact', methods=['POST'])
+def edit_contact():
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+
+    # Get the existing contact details
+    #cur.execute('SELECT * FROM contacts WHERE id = %s', (id,))
+    #contact = cur.fetchone()
+
+    if request.method == 'POST':
+        # Get updated contact details from form
+        id =  int(request.form['id'])
+        name = request.form['Name']
+        phone = request.form['Phone']
+        email = request.form['Email']
+        address = request.form['Address']
+
+        stmt = f"UPDATE contacts SET name = '{name}', phone = '{phone}', email = '{email}', address = '{address}' WHERE id = {id}"
+        
+        # Update the contact in the database
+        cur.execute(stmt)
+        
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('all_contacts'))
 
 # Route to search contact by name
 @app.route('/search_name', methods=['GET', 'POST'])
@@ -106,4 +151,4 @@ def index():
     return render_template('contacts.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8000)
